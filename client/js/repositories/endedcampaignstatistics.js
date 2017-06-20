@@ -45,5 +45,51 @@ Repository.prototype.getCampaignStatistics = function (apiToken,statisticsUrl) {
     });
 };
 
+Repository.prototype.getImageInfo = function (apiToken,imageId) {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: self._server + imageId,
+            type: 'GET',
+            dataType:"json",
+            headers:{
+                'Authorization': apiToken,
+            }
+        }).done(function (result) {
+            resolve(result);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseJSON.error);
+            var error = new Error(errorThrown);
+            error.textStatus = textStatus;
+            error.jqXHR = jqXHR;
+            error.errors = jqXHR.responseJSON;
+            reject(error);
+        });
+    });
+};
+
+Repository.prototype.getImageStatistics = function (apiToken,imageStatisticsUrl) {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: self._server + imageStatisticsUrl,
+            type: 'GET',
+            dataType:"json",
+            headers:{
+                'Authorization': apiToken
+            }
+        }).done(function (result) {
+            resolve(result);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseJSON.error);
+            var error = new Error(errorThrown);
+            error.textStatus = textStatus;
+            error.jqXHR = jqXHR;
+            error.errors = jqXHR.responseJSON;
+            reject(error);
+        });
+    });
+};
+
 exports.Repository = Repository;
 exports.createRepository = Repository;

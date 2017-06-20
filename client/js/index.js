@@ -23,7 +23,8 @@ function App() {
         '/OperationSuccess':'operation-success',
         '/CampaignStatistics':'ended-campaign-statistics',
         '/TaskStatistics':'task-statistics',
-        '/WorkingSessionTask':'task-working-session'
+        '/WorkingSessionTask':'task-working-session',
+        '/ImageStatistics':'image-statistics'
     };
     this.repositories = repositories;
     $("#su").on("click",function(){$("#home").css("display","none");});

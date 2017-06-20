@@ -17,4 +17,6 @@ exports.register = function (options) {
     require('./task-working-session').register(options);
     require('./line-drawer').register(options);
     require('./nav-bar').register(options);
+    require('./image-statistics').register(options);
+    require('./line-displayer').register(options);
 };

@@ -96,5 +96,15 @@ Repository.prototype.deleteCurrentTask = function(){
     delete self.task;
 };
 
+Repository.prototype.setCurrentImageStatistics = function(imageStatistics){
+    var self = this;
+    self.imageStatistics = imageStatistics;
+};
+
+Repository.prototype.getCurrentImageStatistics = function(){
+    var self = this;
+    return self.imageStatistics;
+};
+
 exports.Repository = Repository;
 exports.createRepository = Repository;
