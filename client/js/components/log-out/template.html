@@ -1,0 +1,25 @@
+<nav-bar params = "repositories: repositories"></nav-bar>
+<div class="container" style = "margin: auto">
+    <div class="row" >
+        <div class = "col-sm-2"></div>
+        <div class="col-sm-8">
+            <h1 style = "padding-bottom:1em; text-align: center">Are you sure you want to logout?</h1>
+            <div class="alert alert-danger alert-dismissable fade in" data-bind = "visible: shouldShowMessage">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Warning!</strong><span data-bind = "text:errorMessage"></span>
+            </div>
+            <div class = "row">
+                <div class = "col-sm-3"></div>
+                <div class = "col-sm-3">
+                    <a data-bind = "click: logout" class="btn btn-primary" role="button" style = "text-align:center;"> Yes </a>
+                </div>
+                <div class = "col-sm-3">
+                    <a data-bind = "path: '/UserHome'" class="btn btn-primary" role="button" style = "text-align:center;"> No </a>
+                </div>
+                <div class = "col-sm-3"></div>
+            </div>
+            </form>
+        </div>
+        <div class = "col-sm-2"></div>
+    </div>
+</div>

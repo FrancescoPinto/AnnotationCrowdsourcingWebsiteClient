@@ -1,0 +1,34 @@
+<nav-bar params = "repositories: repositories"></nav-bar>
+<div class="container" style = "margin: auto">
+
+    <div class="row" >
+        <div class = "col-sm-2"></div>
+        <div class = "col-sm-8" data-bind = "if:nextTaskAvailable">
+            <div class="panel panel-primary" >
+                <div class="panel-heading" data-bind = "text:type"></div>
+                <div class="panel-body">
+
+                    <div data-bind = "ifnot:size">
+                        <img data-bind = "attr : {src : image}">
+                        <button class = "btn btn-primary" data-bind = "click: rejectSelection">Reject</button>
+                        <button class = "btn btn-primary" data-bind = "click: acceptSelection">Accept</button>
+                    </div>
+                    <div id = "annotation" data-bind = "if:size">
+                        <line-drawer id = "line-drawer" params="src: image, pen: size, line: line"></line-drawer>
+                        <button class="pull-right btn btn-primary" data-bind = "click: submitAnnotation">Submit</button>
+                        <button class="pull-right btn btn-primary" data-bind = "click: clearAnnotation">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "col-sm-8" data-bind = "ifnot:nextTaskAvailable">
+        <div class="panel panel-primary" >
+            <div class="panel-heading">You completed your task!</div>
+            <div class="panel-body">
+                Congratulations! You completed your task, no more images are available for this task! Return to <a data-bind = "path:'/UserHome'"> your personal homepage</a>.
+            </div>
+        </div>
+        </div>
+        <div class = "col-sm-2"></div>
+    </div>
+</div>

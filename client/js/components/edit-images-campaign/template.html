@@ -1,0 +1,46 @@
+<nav-bar params = "repositories: repositories"></nav-bar>
+<div class="container" style = "margin: auto">
+
+    <div class="row" >
+        <div class = "col-sm-1"></div>
+
+        <div class = "col-sm-7">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Add images to the Campaign</div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <input id = "images"  type="file" accept = "image/jpeg" class="btn btn-default"></input>
+                        <input type = "submit" value = "Add Images" data-bind = "click: addImages"/>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Edit images of Campaign</div>
+                <div class="panel-body">
+                        <p> Press the X button to remove an image from the campaign</p>
+                    <ul data-bind="foreach: images" style = "list-style-type:none">
+                        <li>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close" data-bind = "click: $parent.removeImage">&times;</a>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="thumbnail">
+                                            <!--<a href = "#" data-bind = "click: $parent.getImageInfo">-->
+                                                <img data-bind = "attr: {src: canonical}"/>
+                                            <!--</a>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class = "col-sm-1"></div>
+    </div>
+</div>

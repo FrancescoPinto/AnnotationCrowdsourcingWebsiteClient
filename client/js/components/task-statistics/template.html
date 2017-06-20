@@ -1,0 +1,25 @@
+<nav-bar params = "repositories: repositories"></nav-bar>
+<div class="container" style = "margin: auto">
+
+    <div class="row" >
+        <div class = "col-sm-2"></div>
+        <div class = "col-sm-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Task statistics</div>
+                <div class="panel-body">
+                    <p>
+                        Number of images: <span data-bind = "text:numAvailable"></span><br/>
+                        <span data-bind  ="if:isSelect">
+                        Number of accepted images: <span data-bind = "text:numAccepted"></span><br/>
+                        Number of rejected images: <span data-bind = "text:numRejected"></span><br/>
+                        </span>
+                        <span data-bind = "if:isAnnotate">
+                        Number of annotations: <span data-bind = "text:numAnnotated"></span>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class = "col-sm-2"></div>
+    </div>
+</div>

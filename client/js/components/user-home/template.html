@@ -1,0 +1,143 @@
+<nav-bar params = "repositories: repositories"></nav-bar>
+<div class="container" style = "margin: auto">
+    <div class="row" >
+        <!--SHARED USER PROFILE MANAGEMENT -->
+        <div class = "col-sm-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">User Profile</div>
+                <div class="panel-body">
+                    <p>
+                        User data:<br/>
+                        Fullname: <span data-bind = "text:fullname"></span><br/>
+                        Username: <span  data-bind = "text:username"></span><br/>
+                        Role: <span data-bind = "text:role"></span>
+                    </p>
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#edit" data-bind = "click: setEditUserForm" style = "margin-bottom: 0.5em;" ><span data-bind = "text: editUserString"></span></button>
+
+                    <div id="edit" class="collapse">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="fullname">New Full Name:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="fullname" placeholder="New Full Name" data-bind = "value: newfullname">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="newpwd">New Password:</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="newpwd" placeholder="New Password" data-bind = "value: newpassword" minlength = "8">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-default" data-bind = "click: editUserInfo">Apply</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="alert alert-danger alert-dismissable fade in" data-bind = "visible: shouldShowErrorMessage">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Warning!</strong><span data-bind = "text:errorMessage"></span>
+                    </div>
+                    <div class="alert alert-success alert-dismissable fade in" data-bind = "visible: shouldShowSuccessMessage">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Success!</strong><span data-bind = "text:successMessage"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "col-sm-1"></div>
+        <!--MASTER-->
+        <div class = "col-sm-6" data-bind = "if:isUserMaster">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Started Campaigns
+                        <button type="button" class="btn btn-primary pull-right" data-bind = "click: addCampaign" style = "margin-bottom:0.5em;"><span class = "glyphicon glyphicon-plus"></span>Add Campaign</button>
+                    </div>
+                    <div class="panel-body">
+                        <p data-bind = "ifnot:startedCampaignsAvailable"> No Started Campaigns available, add one.</p>
+                        <table data-bind = "if:startedCampaignsAvailable">
+                            <thead>
+                            <tr><th>Campaign Name</th><th>Actions</th></tr>
+                            </thead>
+                            <tbody data-bind="foreach: startedCampaigns">
+                            <tr>
+                                <td><span data-bind = "text: name"></span></td>
+                                <td><button data-bind = "click:$parent.terminateCampaign">Terminate</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Ready Campaigns
+                    </div>
+                    <div class="panel-body">
+                        <p data-bind = "ifnot:readyCampaignsAvailable"> No Ready Campaigns available, add one.</p>
+                        <table data-bind = "if:readyCampaignsAvailable">
+                            <thead>
+                            <tr><th>Campaign Name</th><th>Actions</th></tr>
+                            </thead>
+                            <tbody data-bind="foreach: readyCampaigns">
+                            <tr>
+                                <td><span data-bind = "text: name"></span></td>
+                                <td><button data-bind = "click: $parent.editImages">Edit Images</button></td>
+                                <td><button data-bind = "click: $parent.editWorkers">Edit Workers</button></td>
+                                <td><button data-bind ="click: $parent.startCampaign">Start!</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Ended Campaigns
+                    </div>
+                    <div class="panel-body">
+                        <p data-bind = "ifnot:endedCampaignsAvailable"> No Ended Campaigns available, add one.</p>
+                        <table data-bind = "if:endedCampaignsAvailable">
+                            <thead>
+                            <tr><th>Campaign Name</th><th>Actions</th></tr>
+                            </thead>
+                            <tbody data-bind="foreach: endedCampaigns">
+                            <tr>
+                                <td><span data-bind = "text: name"></span></td>
+                                <td><button data-bind = "click: $parent.campaignStatistics">Statistics</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+        <div class = "col-sm-1"></div>
+    </div>
+        <!--WORKER-->
+        <div class = "col-sm-6" data-bind = "ifnot:isUserMaster">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        User Tasks
+                    </div>
+                    <div class="panel-body">
+                        <p data-bind = "ifnot:tasksAvailable"> No Tasks available for the user.</p>
+                        <table data-bind = "if:tasksAvailable">
+                            <thead>
+                            <tr><th>Task</th><th>Actions</th></tr>
+                            </thead>
+                            <tbody data-bind="foreach: tasks">
+                            <tr>
+                                <td><span data-bind = "text: type"></span></td>
+                                <td><button data-bind = "click:$parent.workTask">Start Working</button></td>
+                                <td><button data-bind = "click:$parent.getTaskStatistics">Statistics</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

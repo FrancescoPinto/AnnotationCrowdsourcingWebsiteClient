@@ -1,0 +1,39 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href = "#" >Crowdsourcing Campaigns</a> <!--data-bind = "path: '/'"-->
+        </div>
+        <ul class = "nav navbar-nav navbar-left">
+            <li data-bind = "path:'/UserHome', if: statusLogged">
+                <a data-bind = "path: '/UserHome'">
+                    <span class = "glyphicon glyphicon-home">
+                        Home
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+
+            <li data-bind="path: '/SignUp', ifnot: statusLogged">
+                <a data-bind="path: '/SignUp'">
+                      <span class="glyphicon glyphicon-user">
+                      </span>Sign Up
+                </a>
+            </li>
+
+            <li data-bind ="path: '/LogIn', ifnot: statusLogged">
+                <a data-bind="path: '/LogIn'">
+                      <span class="glyphicon glyphicon-log-in">
+                      </span> Login
+                </a>
+            </li>
+
+            <li data-bind ="path: '/LogOut', if: statusLogged">
+                <a data-bind="path: '/LogOut'">
+                      <span class="glyphicon glyphicon-log-out">
+                      </span> Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

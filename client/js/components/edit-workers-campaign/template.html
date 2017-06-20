@@ -1,0 +1,32 @@
+<nav-bar params = "repositories: repositories"></nav-bar>
+<div class="container" style = "margin: auto">
+
+    <div class="row" >
+        <div class = "col-sm-2"></div>
+        <div class = "col-sm-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Workers for the campaign</div>
+                <div class="panel-body">
+                    <h4>Assign one or more roles to the desired workers, then click submit: </h4>
+                    <table>
+                        <thead>
+                        <tr><th>Worker Name</th><th>Selector</th><th>Annotator</th></tr>
+                        </thead>
+                        <tbody data-bind="foreach: workers">
+                        <tr>
+                            <td><a href = "#"><span data-bind="text: fullname"></span></a></td>
+                            <td> <input type="checkbox" data-bind="checked: selector" /></td>
+                            <td> <input type="checkbox" data-bind="checked: annotator" /></td>
+                            <td><button data-bind = "click: $parent.submitWorker">Submit</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class = "col-sm-2"></div>
+    </div>
+    <div>
+        <p><span data-bind = "currentWorker.selection"></span></br><span data-bind = "currentWorker.annotation"></span></p>
+    </div>
+</div>
