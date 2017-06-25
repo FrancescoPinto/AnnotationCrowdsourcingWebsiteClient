@@ -4,36 +4,15 @@
 "use strict";
 
 var ko = require('knockout'), $ = require('jquery');
-ko.bindingHandlers.LineDrawSetSize = {
-    update: function (element, valueAccessor) {
-        var value = ko.unwrap(valueAccessor());
-        if (!value) { return; }
-        element.height = value.height;
-        element.width = value.width;
-    }
-};
 
-ko.bindingHandlers.LineDrawNaturalSize = {
-    init: function (element, valueAccessor) {
-        var value = valueAccessor();
-        function update() {
-            value({
-                width: element.naturalWidth,
-                height: element.naturalHeight
-            });
-        }
-        update();
-        $(element).on('load', update);
-    }
-};
 
-ko.bindingHandlers.LineDraw = {
+ko.bindingHandlers.InitCanvas = {
     init: function (element, valueAccessor) {
-        var value = valueAccessor(),
+        var value = ko.unwrap(valueAccessor()),
             ctx = element.getContext('2d');
         var image = new Image();
         image.addEventListener("load", function () {
-            ctx.drawImage(img, 0, 0);
+            ctx.drawImage(image, 0, 0);
         });
         image.src = value;
     }
@@ -46,19 +25,12 @@ ko.bindingHandlers.LineDraw = {
         }
 };*/
 
-ko.bindingHandlers.LineDrawPen = {
-    update: function (element, valueAccessor) {
-        var value = ko.unwrap(valueAccessor()),
-            $element = $(element);
-        $element.data('pen', value);
-    }
-};
 
 function ViewModel(params) {
     var self = this;
     self.src = params.src;
-    self.pen = params.pen;
-    self.line = params.line;
+    self.data = params.data;
+
 
     self.naturalSize = ko.observable();
 }

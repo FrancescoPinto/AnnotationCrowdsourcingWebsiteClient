@@ -18,9 +18,12 @@ function ViewModel(ctx) {
         alert(x + " " + statistics.annotation[x]);
     }
     self.annotationAvailable = ko.observable(self.annotation().length);
-    alert(ctx.repositories.status.getCurrentImage());
+
+
+    //alert(ctx.repositories.status.getCurrentImage());
     self.src = ko.observable(ctx.repositories.status.getCurrentImage()); //canonical URL
-    alert(ctx.repositories.status.getCurrentCampaign().annotation_size);
+
+    //alert(ctx.repositories.status.getCurrentCampaign().annotation_size);
     self.size = ko.observable(ctx.repositories.status.getCurrentCampaign().annotation_size);
 
     $("#canvas").on("load", function(){

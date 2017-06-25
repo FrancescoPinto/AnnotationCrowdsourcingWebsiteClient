@@ -8,13 +8,39 @@
                     <div class="panel-heading">Campaign statistics</div>
                     <div class="panel-body">
                         <p>
-                            Number of images: <span data-bind = "text:images"></span><br/>
+                            Number of images: <span data-bind = "text:imagesC"></span><br/>
                             Number of accepted images: <span data-bind = "text:accepted"></span><br/>
                             Number of rejected images: <span data-bind = "text:rejected"></span><br/>
                             Number of annotations: <span data-bind = "text:annotation"></span>
                         </p>
                     </div>
                 </div>
+        </div>
+        <div class = "col-sm-2"></div>
+    </div>
+    <div class = "row">
+        <div class = "col-sm-2"></div>
+        <div class = "col-sm-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading"> Images of the Campaign</div>
+                <div class="panel-body">
+                    <ul data-bind="foreach: images" style = "list-style-type:none">
+                        <li>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="thumbnail">
+                                            <a href = "#" data-bind = "click: $parent.getImageInfo">
+                                                <img class="img-thumbnail img-responsive" data-bind = "attr: {src: canonical}"/>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class = "col-sm-2"></div>
     </div>

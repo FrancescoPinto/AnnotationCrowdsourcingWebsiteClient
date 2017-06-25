@@ -24,11 +24,12 @@
                 </div>
                 <div data-bind = "if:annotationAvailable">
                     <!--TEMPORANEO-->
-                    <ol data-bind = "foreach: annotation">
-                        <li>
-                            <!--<line-displayer params="src: src, pen: size, line: $data"></line-displayer>-->
-                            <img data-bind="attr: { src: src }" class="background" draggable="false">
+                    <ol data-bind = "foreach: {data: annotation, as: 'myAnnotation'}">
+                        <li class = "linedrawer">
+                            <line-displayer params="src: $parent.src, data: myAnnotation"></line-displayer>
+                            <!--<img data-bind="attr: { src: $parent.src }" class="background" draggable="false">
                             <canvas id = "canvas"></canvas>
+                            <span data-bind = "text: annotation"></span>-->
                         </li>
                     </ol>
                     <!--
