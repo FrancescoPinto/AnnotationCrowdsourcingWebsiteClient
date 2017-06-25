@@ -182,6 +182,20 @@ function ViewModel(ctx) {
         });
 
     };
+    self.editCampaign = function(campaign){
+        ctx.repositories.userhome.getCampaignInfo(
+            campaign.id,
+            ctx.repositories.status.getAuthApiToken()
+        ).then(function (result) {
+            alert("Successo GetCampaignInfo");
+            ctx.repositories.status.setCurrentCampaign(result);
+            location.hash = "/EditCampaign";
+        }).catch(function (e) {
+            alert("Fallito GetCampaignInfo ");
+            alert(e);
+        });
+
+    };
     self.editWorkers = function(campaign){
 
         ctx.repositories.userhome.getCampaignInfo(

@@ -84,6 +84,7 @@
                             <tbody data-bind="foreach: readyCampaigns">
                             <tr>
                                 <td><span data-bind = "text: name"></span></td>
+                                <td><button data-bind = "click: $parent.editCampaign">Edit Infos</button></td>
                                 <td><button data-bind = "click: $parent.editImages">Edit Images</button></td>
                                 <td><button data-bind = "click: $parent.editWorkers">Edit Workers</button></td>
                                 <td><button data-bind ="click: $parent.startCampaign">Start!</button></td>

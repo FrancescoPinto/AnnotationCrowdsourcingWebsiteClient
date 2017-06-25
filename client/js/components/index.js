@@ -19,4 +19,5 @@ exports.register = function (options) {
     require('./nav-bar').register(options);
     require('./image-statistics').register(options);
     require('./line-displayer').register(options);
+    require('./edit-campaign-info').register(options);
 };

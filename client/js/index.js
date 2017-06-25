@@ -24,7 +24,8 @@ function App() {
         '/CampaignStatistics':'ended-campaign-statistics',
         '/TaskStatistics':'task-statistics',
         '/WorkingSessionTask':'task-working-session',
-        '/ImageStatistics':'image-statistics'
+        '/ImageStatistics':'image-statistics',
+        '/EditCampaign':'edit-campaign-info'
     };
     this.repositories = repositories;
     $("#su").on("click",function(){$("#home").css("display","none");});

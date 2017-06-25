@@ -14,6 +14,7 @@ exports.createRepositories = function (options) {
         endedcampaignstatistics: require("./endedcampaignstatistics").createRepository(options),
         editworkers: require("./editworkers").createRepository(options),
         taskstatistics:require("./taskstatistics").createRepository(options),
-        taskworkingsession:require("./taskworkingsession").createRepository(options)
+        taskworkingsession:require("./taskworkingsession").createRepository(options),
+        editcampaign: require("./editcampaign").createRepository(options)
     };
 };
