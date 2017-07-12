@@ -119,7 +119,7 @@ Repository.prototype.editUserInfo = function (fullname, password, apitoken) {
         $.ajax({
             url: self._server + '/api/user/me',
             type: 'PUT',
-            dataType : 'json',
+            //dataType : 'json',
             headers:{
                 'Authorization': apitoken,
                 'Content-Type':'application/json',

@@ -23,8 +23,8 @@ function ViewModel(ctx) {
     self.endedCampaignsAvailable = ko.observable(false);
     self.endedCampaigns = ko.observableArray();
 
-    self.newpassword = ko.observable();
-    self.newfullname = ko.observable();
+    self.newpassword = ko.observable("");
+    self.newfullname = ko.observable("");
 
     self.shouldShowErrorMessage = ko.observable(false);
     self.errorMessage = ko.observable();
@@ -36,32 +36,113 @@ function ViewModel(ctx) {
     self.tasksAvailable = ko.observable(false);
     self.tasks = ko.observableArray();
 
+    self.setUserCampaigns = function(result){
+        if (!(result === undefined)) {
+            for (var x in Object.getOwnPropertyNames(result.campaigns)) {
+                if (!(result.campaigns[x] == undefined)) {
+                    switch (result.campaigns[x].status) {
+                        case "ended":
+                            self.endedCampaigns().push(result.campaigns[x]);
+                            //alert("ended available");
+                            break;
+                        case "started":
+                            self.startedCampaigns().push(result.campaigns[x]);
+                            //alert("started available");
+                            break;
+                        case "ready":
+                            // alert(result.campaigns[x]);
+                            self.readyCampaigns().push(result.campaigns[x]);
+                            //alert('The length of the array is ' + self.readyCampaigns().length);
+                            //alert("ready available");
+                            break;
+                        default:
+                            //alert("Errore switch campagna");
+                    }
+                }
+            }
+        }
+        //alert(self.endedCampaigns().length + "ended");
+        //alert(self.startedCampaigns().length + "started");
+        //alert(self.readyCampaigns().length + "ready");
+        self.endedCampaignsAvailable(self.endedCampaigns().length > 0 ? true : false);
+        self.startedCampaignsAvailable(self.startedCampaigns().length > 0 ? true : false);
+        self.readyCampaignsAvailable(self.readyCampaigns().length > 0 ? true : false);
+    };
+    self.getUserCampaigns = function(){
+        /*var result = ctx.repositories.status.getUserCampaigns();
+        if (result) {
+            self.setUserCampaigns(result);
+        }else { @TODO NO CACHING: lo stato della campagna lato server può essere cambiato! bisogna ripetere il fetch!*/
+            ctx.repositories.userhome.getUserCampaigns(
+                ctx.repositories.status.getAuthApiToken()
+            ).then(function (result) {
+                //alert("Successo Campagna");
+                //var temp = JSON.parse(result);
+                /*alert("Successo Parse");
+                 alert(result);//ritorna undefined
+                 for(var x in result.campaigns){
+                 alert(x+""+result.campaigns[x]);
+                 }
+                 self.endedCampaigns([]);
+                 self.startedCampaigns([]);
+                 self.readyCampaigns([]);*/
+                //alert(result);
+                self.setUserCampaigns(result);
+            }).catch(function (e) {
+                alert("Fallito");
+                alert(e);
+            });
+        };
+
+    self.setTasksInfo = function(result){
+        self.tasks(result.tasks);
+        self.tasksAvailable((self.tasks().length > 0) ? true : false);
+    };
+
+    self.getTasksInfo = function(){
+        var result = ctx.repositories.status.getTasksInfo();
+        if (result) {
+            self.setTasksInfo(result);
+        }else {
+            ctx.repositories.userhome.getTasksInfo(
+                ctx.repositories.status.getAuthApiToken()
+            ).then(function (result) {
+                //alert("successo tasksInfo");
+                ctx.repositories.status.setTasksInfo(result);
+                self.setTasksInfo(result);
+            }).catch(function (e) {
+                alert("Errore");
+            });
+        }
+    };
+
+    self.setUserInfo = function(result){
+        self.username(result.username);
+        self.role(result.type);
+        self.fullname(result.fullname);
+        self.isUserMaster((result.type == "master") ? true : false);
+        (result.type == "master") ? self.getUserCampaigns() : self.getTasksInfo();
+    };
+
     self.getUserInfo = function() {
-        ctx.repositories.userhome.getUserInfo(
-            ctx.repositories.status.getAuthApiToken()
-        ).then(function (result) {
-            self.username(result.username);
-            self.role(result.type);
-            self.fullname(result.fullname);
-            self.isUserMaster((result.type == "master")?true:false);
-            (result.type == "master")?self.getUserCampaigns() : self.getTasksInfo();
-        }).catch(function (e) {
-            alert("Errore");
-        });
+        var result = ctx.repositories.status.getUserInfo();
+        if (result) {
+            self.setUserInfo(result);
+        } else {
+            ctx.repositories.userhome.getUserInfo(
+                ctx.repositories.status.getAuthApiToken()
+            ).then(function (result) {
+                ctx.repositories.status.setUserInfo(result);
+                self.setUserInfo(result);
+            }).catch(function (e) {
+                alert("Errore");
+            });
+        }
     };
     self.getUserInfo();
 
-    self.getTasksInfo = function(){
-        ctx.repositories.userhome.getTasksInfo(
-            ctx.repositories.status.getAuthApiToken()
-        ).then(function (result) {
-            alert("successo tasksInfo");
-            self.tasks(result.tasks);
-            self.tasksAvailable((self.tasks().length > 0)?true:false);
-        }).catch(function (e) {
-            alert("Errore");
-        });
-    };
+
+
 
     self.workTask = function(task){
         ctx.repositories.userhome.getTaskInfo(
@@ -89,18 +170,23 @@ function ViewModel(ctx) {
 
 
     self.editUserInfo = function () {
-        alert("Chiamo editUserInfo");
-        alert(self.newpassword());
-        alert(self.newfullname());
+        //alert("Chiamo editUserInfo");
+        //alert(self.newpassword());
+        //alert(self.newfullname());
+        var fullname = self.newfullname();
         ctx.repositories.userhome.editUserInfo(
             self.newfullname(),
             self.newpassword(),
             ctx.repositories.status.getAuthApiToken()
         ).then(function (result) {
-            alert("Successo Edit Dati utente");
+            //alert("Successo Edit Dati utente");
             self.shouldShowSuccessMessage(true);
-            alert(result);
+            //alert(result);
             self.successMessage();
+            var result1 = ctx.repositories.status.getUserInfo();
+            result1.fullname = fullname;
+            ctx.repositories.status.setUserInfo(result1);
+            self.fullname(result1.fullname);
             //successMessage(); //@todo, capito cosa è result vedi come scrivi il messaggio
         }).catch(function (e) {
             alert("Fallito Edit ");
@@ -113,56 +199,8 @@ function ViewModel(ctx) {
         });
     };
 
-    self.getUserCampaigns = function(){
-        ctx.repositories.userhome.getUserCampaigns(
-            ctx.repositories.status.getAuthApiToken()
-        ).then(function (result) {
-            //alert("Successo Campagna");
-            //var temp = JSON.parse(result);
-            /*alert("Successo Parse");
-            alert(result);//ritorna undefined
-            for(var x in result.campaigns){
-                alert(x+""+result.campaigns[x]);
-            }
-            self.endedCampaigns([]);
-            self.startedCampaigns([]);
-            self.readyCampaigns([]);*/
-            alert(result);
-            if(!(result === undefined)) {
-                for (var x in Object.getOwnPropertyNames(result.campaigns)) {
-                    if (!(result.campaigns[x] == undefined)) {
-                        switch (result.campaigns[x].status) {
-                            case "ended":
-                                self.endedCampaigns().push(result.campaigns[x]);
-                                alert("ended available");
-                                break;
-                            case "started":
-                                self.startedCampaigns().push(result.campaigns[x]);
-                                alert("started available");
-                                break;
-                            case "ready":
-                               // alert(result.campaigns[x]);
-                                self.readyCampaigns().push(result.campaigns[x]);
-                                //alert('The length of the array is ' + self.readyCampaigns().length);
-                                alert("ready available");
-                                break;
-                            default:
-                                alert("Errore switch campagna");
-                        }
-                    }
-                }
-            }
-            alert(self.endedCampaigns().length + "ended");
-            alert(self.startedCampaigns().length + "started");
-            alert(self.readyCampaigns().length + "ready");
-                self.endedCampaignsAvailable(self.endedCampaigns().length>0?true:false);
-                self.startedCampaignsAvailable(self.startedCampaigns().length>0?true:false);
-                self.readyCampaignsAvailable(self.readyCampaigns().length>0?true:false);
-        }).catch(function (e) {
-            alert("Fallito");
-            alert(e);
-        });
-    };
+
+
     //self.getUserCampaigns(); //important: calls it
 
     self.addCampaign = function(){
@@ -217,12 +255,43 @@ function ViewModel(ctx) {
         ).then(function (result) {
             alert("Successo GetCampaignInfo");
             ctx.repositories.status.setCurrentCampaign(result);
-            location.hash = "/CampaignStatistics";
+
+            ctx.repositories.endedcampaignstatistics.getCampaignStatistics(
+                ctx.repositories.status.getAuthApiToken(),
+                ctx.repositories.status.getCurrentCampaign().statistics
+            ).then(function (result) {
+                //alert("Success");
+                ctx.repositories.status.setCurrentCampaignStatistics(result);
+
+                ctx.repositories.editimages.getCampaignImages(
+                    ctx.repositories.status.getAuthApiToken(),
+                    ctx.repositories.status.getCurrentCampaign().image
+                ).
+                then(function (result) {
+                    ctx.repositories.status.setCurrentCampaignStatisticsImages(result.images);
+                    location.hash = "/CampaignStatistics";
+                }).catch(function (e) {
+                    alert("Error loaded");
+                    alert(e);
+                });
+
+            }).catch(function (e) {
+                //alert("Error");
+                self.shouldShowMessage(true);
+                var temp = '';
+                for (var x in e.errors) {
+                    temp += x + ": " + e.errors[x];
+                }
+                self.errorMessage(" " + temp);
+            });
+
         }).catch(function (e) {
             alert("Fallito GetCampaignInfo ");
             alert(e);
         });
     };
+
+
     //$("#editButton").addEventListener("click",
     self.setEditUserForm = function(){
 

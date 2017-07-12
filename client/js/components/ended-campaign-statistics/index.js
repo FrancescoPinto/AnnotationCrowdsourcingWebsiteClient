@@ -9,53 +9,57 @@ function ViewModel(ctx) {
     var self = this;
     self.repositories = ctx.repositories;
     self.campaignName = ko.observable(ctx.repositories.status.getCurrentCampaign().name);
-    self.imagesC = ko.observable();
-    self.accepted = ko.observable();
-    self.rejected = ko.observable();
-    self.annotation = ko.observable();
-    self.images = ko.observableArray();
+    var tempStat = ctx.repositories.status.getCurrentCampaignStatistics();
+    self.imagesC = ko.observable(tempStat.images);
+    self.accepted = ko.observable(tempStat.accepted);
+    self.rejected = ko.observable(tempStat.rejected);
+    self.annotation = ko.observable(tempStat.annotation);
+    self.images = ko.observableArray(ctx.repositories.status.getCurrentCampaignStatisticsImages());
 
 
-    self.getCampaignStatistics = function () {
-        ctx.repositories.endedcampaignstatistics.getCampaignStatistics(
+//    self.setCampaignStatistics = function(result){
+
+  //  };
+    //self.getCampaignStatistics = function () {
+        /*var cachedResult = ctx.repositories.status.getCurrentCampaignStatistics();
+         if(cachedResult){
+         self.setCampaignStatistics(cachedResult);
+         }else {*/
+       /* ctx.repositories.endedcampaignstatistics.getCampaignStatistics(
             ctx.repositories.status.getAuthApiToken(),
             ctx.repositories.status.getCurrentCampaign().statistics
         ).then(function (result) {
-            alert("Success");
+            //alert("Success");
             self.imagesC(result.images);
             self.accepted(result.accepted);
             self.rejected(result.rejected);
             self.annotation(result.annotation);
+            //ctx.repositories.status.setCurrentCampaignStatistics(result);
         }).catch(function (e) {
-            alert("Error");
+            //alert("Error");
             self.shouldShowMessage(true);
             var temp = '';
-            for(var x in e.errors){
+            for (var x in e.errors) {
                 temp += x + ": " + e.errors[x];
             }
-            self.errorMessage(" " +temp);
+            self.errorMessage(" " + temp);
         });
+        //}
     };
 
-    self.loaded = function(){
+        self.loaded = function(){
         ctx.repositories.editimages.getCampaignImages(
-            ctx.repositories.status.getAuthApiToken(),
-            ctx.repositories.status.getCurrentCampaign().image
+        ctx.repositories.status.getAuthApiToken(),
+        ctx.repositories.status.getCurrentCampaign().image
         ).
         then(function (result) {
-            self.images(result.images);
-
-            /*if(!(result[images] === undefined)) {
-                if (result[images].length > 0) {
-                    self.images(result);
-                }
-            }*/
+        self.images(result.images);
         }).catch(function (e) {
-            alert("Error loaded");
-            alert(e);
+        alert("Error loaded");
+        alert(e);
         });
-    };
-
+        };
+*/
 
     //RACCOGLIE STATISTIC URL, POI LO USA PER ALTRO SCOPO
     self.getImageInfo = function(image){
@@ -81,8 +85,8 @@ function ViewModel(ctx) {
 
     };
 
-    self.loaded();
-    self.getCampaignStatistics();
+   // self.loaded();
+    // self.getCampaignStatistics();
 }
 
 exports.register = function () {

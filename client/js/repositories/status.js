@@ -106,5 +106,66 @@ Repository.prototype.getCurrentImageStatistics = function(){
     return self.imageStatistics;
 };
 
+Repository.prototype.getUserInfo = function () {
+    var self = this;
+    return self.userInfo;
+};
+Repository.prototype.deleteUserInfo = function () {
+    var self = this;
+    self.userInfo = undefined;
+};
+Repository.prototype.setUserInfo = function (userInfo) {
+    var self = this;
+    self.userInfo = userInfo;
+};
+
+Repository.prototype.getTasksInfo = function () {
+    var self = this;
+    return self.tasksInfo;
+};
+Repository.prototype.deleteTasksInfo = function () {
+    var self = this;
+    self.tasksInfo = undefined;
+};
+Repository.prototype.setTasksInfo = function (tasksInfo) {
+    var self = this;
+    self.tasksInfo = tasksInfo;
+};
+
+Repository.prototype.getUserCampaigns = function () {
+    var self = this;
+    return self.userCampaigns;
+};
+Repository.prototype.deleteUserCampaigns = function () {
+    var self = this;
+    self.userCampaigns = undefined;
+};
+Repository.prototype.setUserCampaigns = function (userCampaigns) {
+    var self = this;
+    self.userCampaigns = userCampaigns;
+};
+
+Repository.prototype.getCurrentCampaignStatistics = function () {
+    var self = this;
+    return self.currentCampaignStatistics;
+};
+Repository.prototype.deleteCurrentCampaignStatistics = function () {
+    var self = this;
+    self.currentCampaignStatistics = undefined;
+};
+Repository.prototype.setCurrentCampaignStatistics = function (currentCampaignStatistics) {
+    var self = this;
+    self.currentCampaignStatistics = currentCampaignStatistics;
+};
+
+Repository.prototype.setCurrentCampaignStatisticsImages = function(imgs){
+    var self = this;
+    self.currentCampaignStatisticsImages = imgs;
+}
+
+Repository.prototype.getCurrentCampaignStatisticsImages = function () {
+    var self = this;
+    return self.currentCampaignStatisticsImages;
+};
 exports.Repository = Repository;
 exports.createRepository = Repository;
