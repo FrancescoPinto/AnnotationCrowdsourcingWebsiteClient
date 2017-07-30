@@ -153,7 +153,7 @@ function ViewModel(ctx) {
                 ctx.repositories.status.getAuthApiToken()
             ).then(function (result) {
                 //alert("successo tasksInfo");
-                ctx.repositories.status.setTasksInfo(result);
+                //ctx.repositories.status.setTasksInfo(result);
                 self.setTasksInfo(result);
             }).catch(function (e) {
                 alert("Errore");
@@ -197,6 +197,9 @@ function ViewModel(ctx) {
             ctx.repositories.status.getAuthApiToken(),
             task.id
         ).then(function (result) {
+            //for(var x in result){
+            //    alert(x + " " + result[x]);
+            //}
             ctx.repositories.status.setCurrentTask(result);
             location.hash = "/WorkingSessionTask";
         }).catch(function (e) {

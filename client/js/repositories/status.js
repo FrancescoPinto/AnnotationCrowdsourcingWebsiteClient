@@ -93,7 +93,7 @@ Repository.prototype.getCurrentTask = function(){
 };
 Repository.prototype.deleteCurrentTask = function(){
     var self = this;
-    delete self.task;
+    self.task = undefined;
 };
 
 Repository.prototype.setCurrentImageStatistics = function(imageStatistics){

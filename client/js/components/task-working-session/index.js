@@ -27,18 +27,20 @@ function ViewModel(ctx) {
         $("#annotation").append("<line-drawer id = 'line-drawer' params='src: image, pen: size, line: line'></line-drawer>");*/
     };
 
-    self.startWorkingSession = function (isNext) {
+    self.startWorkingSession = function (/*isNext*/) {
         ctx.repositories.taskworkingsession.startWorkingSession(
             ctx.repositories.status.getAuthApiToken(),
             ctx.repositories.status.getCurrentTask().session
         ).then(function (result) {
-          //  alert("Success");
-            if(isNext){
+            //alert("Success start working sessione");
+           // if(isNext){
                 self.getNextTaskInstance();
-            }
+           // }
         }).catch(function (e) {
-            if(e == "Error: Not Found"){
-               // self.nextTaskAvailable(false);
+            if(e == "Error: Not Found" && ctx.repositories.status.getCurrentTask().type == "selection"){
+                self.nextTaskAvailable(false);
+            }else if(e == "Error: Not Found" && ctx.repositories.status.getCurrentTask().type == "annotation"){
+                self.annotationEnabled(false);
             }
             //alert("session" + e.textStatus);
             //alert("Error");
@@ -53,7 +55,7 @@ function ViewModel(ctx) {
             ctx.repositories.status.getAuthApiToken(),
             ctx.repositories.status.getCurrentTask().session
         ).then(function (result) {
-           // alert("Success");
+           // alert("Success next task instance");
             self.type(result.type);
             self.image(result.image);
             self.size(result.size);
@@ -68,7 +70,7 @@ function ViewModel(ctx) {
            // alert(e);//GONE = Già fatto
         });
     };
-    self.getNextTaskInstance();
+    //self.getNextTaskInstance();
 
 
     self.submitAnnotation = function(){
