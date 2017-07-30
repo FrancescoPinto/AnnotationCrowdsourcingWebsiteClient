@@ -17,7 +17,7 @@ Repository.prototype.login = function (username,pwd) {
     var self = this;
     //per i test dada, dada, legiliments  (role master) -> registrato con successo
     //anche dada1,dada1,legiliments (role worker) -> registrato con successo
-    alert("Sto per fare il Promise con dati" + username + pwd);
+    //alert("Sto per fare il Promise con dati" + username + pwd);
     return new Promise(function (resolve, reject) {
         $.ajax({
             url: self._server + '/api/auth',
@@ -34,7 +34,7 @@ Repository.prototype.login = function (username,pwd) {
             resolve(result);
         }).fail(function (jqXHR, textStatus, errorThrown) {
             //alert("Ho fallito");
-            alert(jqXHR.responseJSON.error);
+            //alert(jqXHR.responseJSON.error);
             var error = new Error(errorThrown);
             error.textStatus = textStatus;
             error.jqXHR = jqXHR;

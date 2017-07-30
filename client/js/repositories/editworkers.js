@@ -15,10 +15,10 @@ function Repository(server) {
 
 Repository.prototype.getWorkers = function (apiToken, workerUrl) {
     var self = this;
-    alert("Promise");
+    //alert("Promise");
     return new Promise(function (resolve, reject) {
-        alert(self._server + workerUrl);
-        alert(apiToken);
+        //alert(self._server + workerUrl);
+        //alert(apiToken);
         $.ajax({
             url: self._server + workerUrl,
             type: 'GET',
@@ -34,7 +34,7 @@ Repository.prototype.getWorkers = function (apiToken, workerUrl) {
              for(var x in result){
              alert(result[x]);
              }*/
-            alert("successoAjaxWorkers");
+            //alert("successoAjaxWorkers");
             resolve(result);
         }).fail(function (jqXHR, textStatus, errorThrown) {
             alert("Ho fallito");
@@ -52,10 +52,10 @@ Repository.prototype.getWorkers = function (apiToken, workerUrl) {
 
 Repository.prototype.getWorkerInfo = function (apiToken, workerUrl) {
         var self = this;
-        alert("Promise");
+       // alert("Promise");
         return new Promise(function (resolve, reject) {
-            alert(self._server + workerUrl);
-            alert(apiToken);
+            //alert(self._server + workerUrl);
+            //alert(apiToken);
             $.ajax({
                 url: self._server + workerUrl,
                 type: 'GET',
@@ -64,14 +64,14 @@ Repository.prototype.getWorkerInfo = function (apiToken, workerUrl) {
                     'Authorization': apiToken,
                 }
             }).done(function (result) {
-                for(var x in Object.keys(result)){
+               /* for(var x in Object.keys(result)){
                  alert(Object.keys(result)[x]);
                  }
 
                  for(var x in result){
                  alert(result[x]);
                  }
-                alert("successoAjaxWorkerInfo");
+                alert("successoAjaxWorkerInfo");*/
                 resolve(result);
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 alert("fallitoAjaxWorkerInfo");
@@ -89,10 +89,10 @@ Repository.prototype.getWorkerInfo = function (apiToken, workerUrl) {
 
 Repository.prototype.setSelector = function (apiToken, isSelector, workerUrl) {
     var self = this;
-    alert("Promise");
+   // alert("Promise");
     return new Promise(function (resolve, reject) {
-        alert(self._server + workerUrl);
-        alert(apiToken);
+        /*alert(self._server + workerUrl);
+        alert(apiToken);*/
         $.ajax({
             url: self._server + workerUrl,
             type: isSelector?'POST':'DELETE',
@@ -100,7 +100,7 @@ Repository.prototype.setSelector = function (apiToken, isSelector, workerUrl) {
                 'Authorization': apiToken,
             }
         }).done(function (result) {
-            alert("successoAjaxSelector");
+            //alert("successoAjaxSelector");
             resolve(result);
         }).fail(function (jqXHR, textStatus, errorThrown) {
             alert("fallitoAjaxSelector");
@@ -118,10 +118,10 @@ Repository.prototype.setSelector = function (apiToken, isSelector, workerUrl) {
 
 Repository.prototype.setAnnotator = function (apiToken, isAnnotator, workerUrl) {
     var self = this;
-    alert("Promise");
+    //alert("Promise");
     return new Promise(function (resolve, reject) {
-        alert(self._server + workerUrl);
-        alert(apiToken);
+      //  alert(self._server + workerUrl);
+       // alert(apiToken);
         $.ajax({
             url: self._server + workerUrl,
             type: isAnnotator?'POST':'DELETE',
@@ -129,7 +129,7 @@ Repository.prototype.setAnnotator = function (apiToken, isAnnotator, workerUrl) 
                 'Authorization': apiToken,
             }
         }).done(function (result) {
-            alert("successoAjaxAnnotator");
+            //alert("successoAjaxAnnotator");
             resolve(result);
         }).fail(function (jqXHR, textStatus, errorThrown) {
             alert("FallitoAjaxAnnotator");

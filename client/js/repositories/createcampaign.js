@@ -46,7 +46,7 @@ Repository.prototype.createCampaign = function (apiToken,campaignName,selectionR
             for(var x in temp){
                 alert(x +" "+ temp[x]);
             }
-            error.errors = jqXHR.responseJSON;
+            error.errors = JSON.parse(jqXHR.responseText);
             reject(error);
         });
     });

@@ -37,16 +37,16 @@ Repository.prototype.editCampaign = function (apiToken,id,campaignName,selection
             /*for(var x in jqXHR){
              alert(x + " " + jqXHR[x]);
              }*/
-            alert(jqXHR.responseJSON.error);
+            //alert(jqXHR.responseJSON.error);
             var error = new Error(errorThrown);
             error.textStatus = textStatus;
             error.jqXHR = jqXHR;
-            alert(jqXHR.responseText);
+            //alert(jqXHR.responseText);
             var temp = JSON.parse(jqXHR.responseText);
-            for(var x in temp){
+            /*for(var x in temp){
                 alert(x +" "+ temp[x]);
-            }
-            error.errors = jqXHR.responseJSON;
+            }*/
+            error.errors = JSON.parse(jqXHR.responseText);
             reject(error);
         });
     });

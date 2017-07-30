@@ -28,7 +28,7 @@ function ViewModel(ctx) {
         ).then(function (result) {
             //alert("Success");
             ctx.repositories.status.setApiToken(result.token);
-            alert("HO SETTATO API TOKEN");
+            //alert("HO SETTATO API TOKEN");
             /*for(var x in ctx){
                 alert(x + " " +ctx[x]);
             }
@@ -37,7 +37,7 @@ function ViewModel(ctx) {
             //alert(ctx.repositories.status.getApiToken());
             location.hash = '/UserHome';
         }).catch(function (e) {
-            alert("Error");
+           // alert("Error");
             self.shouldShowMessage(true);
             self.errorMessage(" " +e.errors.error);
         });

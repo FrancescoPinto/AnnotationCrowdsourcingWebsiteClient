@@ -8,7 +8,7 @@
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong>Warning!</strong><span data-bind = "text:errorMessage"></span>
             </div>
-            <form class="form-horizontal">
+            <form data-bind="submit: login" class="form-horizontal">
                 <div class="form-group">
                     <label class="control-label col-sm-2" for = "username">Username:</label>
                     <div class="col-sm-10">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="button" class="btn btn-primary" data-bind = "click: login">Login</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
                     </div>
                 </div>
             </form>

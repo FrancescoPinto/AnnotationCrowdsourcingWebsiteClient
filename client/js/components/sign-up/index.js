@@ -17,19 +17,20 @@ function ViewModel(ctx) {
     });
     //QUESTI ERROR IN REALTA' SONO BINDATI A DEI COSI HTML!!! VEDI L'ESEMPIO KO
     self.username = ko.observable();
-    self.usernameError = ko.observable();
+    //     self.usernameError = ko.observable();
 
     self.password1 = ko.observable();
-    self.password1Error = ko.observable();
+    //self.password1Error = ko.observable();
 
     /*self.password2 = ko.observable();
     self.password2Error = ko.observable();*/
 
     self.role = ko.observable("master");
-    self.roleError = ko.observable();
+    //  self.roleError = ko.observable();
 
     self.shouldShowMessage = ko.observable(false);
     self.errorMessage = ko.observableArray();
+    self.alertMessages = ko.observableArray();
 
     self.validateAndSend = function () {
             ctx.repositories.signup.validateAndSend(
@@ -38,15 +39,21 @@ function ViewModel(ctx) {
                 self.password1(),
                 self.role()
             ).then(function (result) {
-                alert("Messaggio inviato, risposta ricevuta");
-                alert(result);//undefined???
+               // alert("Messaggio inviato, risposta ricevuta");
+                //alert(result);//undefined???
                 location.hash = "/SignUpOutcomeP";
             }).catch(function (e) {
-                self.shouldShowMessage(true);
+                self.alertMessages.removeAll();
+                var tempErr = [];
+                for(var i in e.errors.error) {
+                    tempErr.push(" "+i +": " +e.errors.error[i]);
+                }
+                self.alertMessages.push({shouldShowMessage:true, errorMessage:tempErr})
+                /*self.shouldShowMessage(true);
                 self.errorMessage.removeAll();
                 for(var i in e.errors.error) {
                     self.errorMessage.push(" "+i +": " +e.errors.error[i]);
-                }
+                }*/
                 /*
                 if (e.errors) {
                     alert("Errore");

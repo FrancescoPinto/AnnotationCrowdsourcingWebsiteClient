@@ -14,21 +14,21 @@ function ViewModel(ctx) {
     self.currentWorker = ko.observable();
 
     self.getWorkers = function(){
-        alert("sto per fare workers");
+        //alert("sto per fare workers");
         ctx.repositories.editworkers.getWorkers(
             ctx.repositories.status.getAuthApiToken(),
             ctx.repositories.status.getCurrentCampaign().worker
         ).
         then(function (result) {
-            alert("successo workers");
-            alert(Object.keys(result).length);
+           // alert("successo workers");
+           // alert(Object.keys(result).length);
             /*for(var x in Object.getOwnPropertyNames(result))
             {
                 alert(x + " " +result[x]);
             }*/
-            for(var x in result.workers){
+           /* for(var x in result.workers){
                 alert(result.workers[x].id);
-            }
+            }*/
             self.workers(result.workers);
         }).catch(function (e) {
             alert("Error workers");
@@ -38,13 +38,13 @@ function ViewModel(ctx) {
     self.getWorkers();
 
     self.submitWorker = function(worker){
-        alert("sto per fare submitWorker");
+        //alert("sto per fare submitWorker");
         ctx.repositories.editworkers.getWorkerInfo(
             ctx.repositories.status.getAuthApiToken(),
             worker.id
         ).
         then(function (result) {
-            alert("successo submitWorker");
+           // alert("successo submitWorker");
             /*for(var x in Object.getOwnPropertyNames(result))
              {
              alert(x + " " +result[x]);
@@ -60,16 +60,16 @@ function ViewModel(ctx) {
 
 
     self.setSelector = function(worker){
-        alert("Sto per fare setSelector");
+        //alert("Sto per fare setSelector");
         ctx.repositories.editworkers.setSelector(
             ctx.repositories.status.getAuthApiToken(),
             worker.selector,
             self.currentWorker().selection
         ).
         then(function (result) {
-            alert("successo selectionEdit");
+            //alert("successo selectionEdit");
         }).catch(function (e) {
-            alert("Error SelectionEdit");
+            //alert("Successo");
             alert(e);
         });
     };
@@ -81,7 +81,7 @@ function ViewModel(ctx) {
             self.currentWorker().annotation
         ).
         then(function (result) {
-            alert("successo annotationEdit");
+            alert("Successo");
         }).catch(function (e) {
             alert("Error annotationEdit");
             alert(e);

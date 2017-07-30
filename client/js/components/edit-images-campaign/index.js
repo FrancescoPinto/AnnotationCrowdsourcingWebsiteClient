@@ -35,7 +35,7 @@ function ViewModel(ctx) {
             data.append("file"+i,document.getElementById("images").files[x]);
             alert("file"+i + " appended");
         }
-        //@TODO PER UN'ANTEPRIMA DEL FILE
+
         /* $(":file").change(function () {
             if (this.files && this.files[0]) {
                 var reader = new FileReader();
@@ -51,7 +51,6 @@ function ViewModel(ctx) {
 
 
         /*var data = new FormData();
-        //@TODO PER ORA FAI SINGOLO FILE ALLA VOLTA
         data.append("file",$("#images").files[0]);
 
         var i = 0;
@@ -70,11 +69,11 @@ function ViewModel(ctx) {
             data,
             ctx.repositories.status.getCurrentCampaign().image
         ).then(function (result) {
-            alert("Success upload");
+            //alert("Success upload");
             self.loaded();
         }).catch(function (e) {
-            alert("Error upload");
-            alert(e);
+            /*alert("Error upload");
+            alert(e);*/
         });
 
         /*for(var i in $("#images").files){
@@ -123,17 +122,17 @@ function ViewModel(ctx) {
         $("#image"+i).attr('src', evt.target.result);
     };*/
     self.removeImage = function(image){
-        alert(image.id);
+        //alert(image.id);
         ctx.repositories.editimages.removeImage(
             ctx.repositories.status.getAuthApiToken(),
             image.id
             //self.images(this)).id
         ).then(function (result) {
-            alert("Success Removed");
+            //alert("Success Removed");
             self.loaded();
         }).catch(function (e) {
-            alert("Error Removed");
-            alert(e);
+            /*alert("Error Removed");
+            alert(e);*/
         });
     }
 
@@ -144,7 +143,7 @@ function ViewModel(ctx) {
            ctx.repositories.status.getCurrentCampaign().image
        ).
        then(function (result) {
-           alert(Object.keys(result).length);
+           /*alert(Object.keys(result).length);
            for(var x in Object.getOwnPropertyNames(result))
            {
                alert(x + " " +result[x]);
@@ -152,7 +151,7 @@ function ViewModel(ctx) {
            for(var x in result.images){
                alert(result.images[x].id);
            }
-           alert("Success loaded");
+           alert("Success loaded");*/
            self.images(result.images);
 
            /*for(var x in result.images){
@@ -165,8 +164,8 @@ function ViewModel(ctx) {
                }
            }
        }).catch(function (e) {
-           alert("Error loaded");
-           alert(e);
+           /*alert("Error loaded");
+           alert(e);*/
        });
     };
 

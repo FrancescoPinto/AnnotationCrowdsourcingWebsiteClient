@@ -98,7 +98,7 @@ Repository.prototype.getCampaignInfo = function (id,apitoken){
                 'Authorization': apitoken
             }
         }).done(function (result) {
-            alert("successo getCampaignAjax");
+            //alert("successo getCampaignAjax");
             resolve(result);
         }).fail(function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseJSON.error);
@@ -163,7 +163,7 @@ Repository.prototype.getUserCampaigns = function (apitoken) {
                 'Content-Type':'application/json',
             },
         }).done(function (result) {
-            alert("SuccessoAjaxCampaigns");
+            //alert("SuccessoAjaxCampaigns");
             resolve(result);
         }).fail(function (jqXHR, textStatus, errorThrown) {
             alert("FallitoAjax");
@@ -193,7 +193,7 @@ Repository.prototype.startCampaign = function(campaign,apitoken) {
             'Authorization': apitoken
         }
     }).done(function (result) {
-        alert("SuccessoAjaxStartCampaign");
+       // alert("SuccessoAjaxStartCampaign");
         resolve(result);
     }).fail(function (jqXHR, textStatus, errorThrown) {
         alert("FallitoAjaxStartCampaign");
@@ -224,7 +224,7 @@ Repository.prototype.terminateCampaign = function(campaign,apitoken) {
                 'Authorization': apitoken
             }
         }).done(function (result) {
-            alert("SuccessoAjaxTerminateCampaign");
+           // alert("SuccessoAjaxTerminateCampaign");
             resolve(result);
         }).fail(function (jqXHR, textStatus, errorThrown) {
             alert("FallitoAjaxTerminateCampaign");

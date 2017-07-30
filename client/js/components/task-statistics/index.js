@@ -16,12 +16,12 @@ function ViewModel(ctx) {
     self.isAnnotate = ko.observable(false);
 
     self.getTaskStatistics = function () {
-        alert(ctx.repositories.status.getCurrentTask().statistics);
+       // alert(ctx.repositories.status.getCurrentTask().statistics);
         ctx.repositories.taskstatistics.getTaskStatistics(
             ctx.repositories.status.getAuthApiToken(),
             ctx.repositories.status.getCurrentTask().statistics
         ).then(function (result) {
-            alert("Success");
+           // alert("Success");
             self.numAvailable(result.available);
             self.numAccepted(result.accepted);
             self.numRejected(result.rejected);

@@ -32,14 +32,16 @@ Repository.prototype.uploadCampaignPhotos = function (apiToken,files, imageUrl) 
                 alert("Caricamento avvenuto con successo!");
             }
         }).done(function (result) {
-
+            for(var x in result){
+                alert(x + " " + result[x]);
+            }
             resolve(result);
         }).fail(function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseJSON.error);
             var error = new Error(errorThrown);
             error.textStatus = textStatus;
             error.jqXHR = jqXHR;
-            error.errors = JSON.parse(jqXHR.responseText);
+            error.errors = jqXHR.responseJSON.error;
             reject(error);
         });
     });

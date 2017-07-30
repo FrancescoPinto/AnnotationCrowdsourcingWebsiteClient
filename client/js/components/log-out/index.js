@@ -12,12 +12,12 @@ function ViewModel(ctx) {
     self.errorMessage = ko.observable();
 
     self.logout = function () {
-        alert("STo per eliminare: "+ctx.repositories.status.getApiToken());
+       // alert("STo per eliminare: "+ctx.repositories.status.getApiToken());
         ctx.repositories.logout.logout(
             ctx.repositories.status.getApiToken()
         ).then(function (result) {
-            alert("Successo");
-            ctx.repositories.status.deleteApiToken();
+           // alert("Successo");
+            ctx.repositories.status.clearCache();
             location.hash = "/";
         }).catch(function (e) {
             alert("Errore");

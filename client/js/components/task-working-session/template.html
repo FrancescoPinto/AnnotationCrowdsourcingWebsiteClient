@@ -3,7 +3,7 @@
 
     <div class="row" >
         <div class = "col-sm-2"></div>
-        <div class = "col-sm-8" data-bind = "if:nextTaskAvailable">
+        <div class = "col-sm-8" data-bind = "if:shouldShow">
             <div class="panel panel-primary" >
                 <div class="panel-heading" data-bind = "text:type"></div>
                 <div class="panel-body">
@@ -28,6 +28,14 @@
                 Congratulations! You completed your task, no more images are available for this task! Return to <a data-bind = "path:'/UserHome'"> your personal homepage</a>.
             </div>
         </div>
+        </div>
+        <div class = "col-sm-8" data-bind = "ifnot:annotationEnabled">
+            <div class="panel panel-primary" >
+                <div class="panel-heading">Wait!</div>
+                <div class="panel-body">
+                    The annotation task is not enabled! Return at your <a data-bind = "path:'/UserHome'">home page</a>
+                </div>
+            </div>
         </div>
         <div class = "col-sm-2"></div>
     </div>

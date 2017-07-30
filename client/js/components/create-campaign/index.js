@@ -14,8 +14,9 @@ function ViewModel(ctx) {
     self.annotationReplica = ko.observable();
     self.annotationSize = ko.observable();
 
-    self.shouldShowMessage = ko.observable(false);
-    self.errorMessage = ko.observable();
+    //self.shouldShowMessage = ko.observable(false);
+    //self.errorMessage = ko.observable();
+    self.alertMessages = ko.observableArray();
 
     self.createCampaign = function () {
         ctx.repositories.createcampaign.createCampaign(
@@ -31,12 +32,18 @@ function ViewModel(ctx) {
             location.hash = '/OperationSuccess';
         }).catch(function (e) {
             alert("Error");
-            self.shouldShowMessage(true);
+            /*self.shouldShowMessage(true);
             var temp = ''
-            for(var x in e.errors){
-                temp += x + ": " + e.errors[x];
+            for(var x in e.error){
+                temp += x + ": " + e.error[x];
             }
-            self.errorMessage(" " +temp);
+            self.errorMessage(" " +temp);*/
+            self.alertMessages.removeAll();
+            var tempErr = "";
+            for(var i in e.errors.error) {
+                tempErr += " "+i +": " +e.errors.error[i] + ".";
+            }
+            self.alertMessages.push({shouldShowMessage:true, errorMessage:tempErr});
         });
     };
 

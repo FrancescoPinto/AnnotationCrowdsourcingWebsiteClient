@@ -24,7 +24,28 @@ ko.bindingHandlers.InitCanvas = {
 
         }
 };*/
+ko.bindingHandlers.LineDrawSetSize = {
+    update: function (element, valueAccessor) {
+        var value = valueAccessor()();
+        if (!value) { return; }
+        element.height = value.height;
+        element.width = value.width;
+    }
+};
 
+ko.bindingHandlers.LineDrawNaturalSize = {
+    init: function (element, valueAccessor) {
+        var value = valueAccessor();
+        function update() {
+            value({
+                width: element.naturalWidth,
+                height: element.naturalHeight
+            });
+        }
+        update();
+        $(element).on('load', update);
+    }
+};
 
 function ViewModel(params) {
     var self = this;

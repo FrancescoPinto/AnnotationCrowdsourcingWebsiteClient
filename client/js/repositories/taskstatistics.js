@@ -24,9 +24,9 @@ Repository.prototype.getTaskStatistics = function (apiToken,statisticsUrl) {
                 'Authorization': apiToken
             }
         }).done(function (result) {
-            for(var x in result){
+            /*for(var x in result){
                 alert(x+" "+result[x]);
-            }
+            }*/
             resolve(result);
         }).fail(function (jqXHR, textStatus, errorThrown) {
             for (var x in jqXHR)

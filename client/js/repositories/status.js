@@ -167,5 +167,50 @@ Repository.prototype.getCurrentCampaignStatisticsImages = function () {
     var self = this;
     return self.currentCampaignStatisticsImages;
 };
+
+
+Repository.prototype.setCurrentCampaignImages = function(imgs){
+    var self = this;
+    self.currentCampaignImages = imgs;
+};
+
+Repository.prototype.getCurrentCampaignImages = function(){
+    var self = this;
+    return self.currentCampaignImages;
+};
+
+Repository.prototype.deleteCurrentCampaignImages = function(){
+    var self = this;
+    self.currentCampaignImages = undefined;
+};
+
+Repository.prototype.setOldImagesUrl = function(old){
+    var self = this;
+    self.oldImagesUrl;
+};
+Repository.prototype.getOldImagesUrl = function(){
+    var self = this;
+    return self.oldImagesUrl;
+};
+Repository.prototype.deleteOldImagesUrl = function(){
+    var self = this;
+    self.oldImagesUrl = undefined;
+};
+
+
+Repository.prototype.clearCache = function(){
+    var self = this;
+    self.deleteCurrentImage();
+    self.deleteCurrentCampaignStatistics();
+    self.deleteCurrentCampaign();
+    self.deleteApiToken();
+    self.deleteCurrentTask();
+    self.deleteUserInfo();
+    self.deleteTasksInfo();
+    self.deleteUserCampaigns();
+    self.deleteCurrentCampaignImages();
+    self.deleteOldImagesUrl();
+};
+
 exports.Repository = Repository;
 exports.createRepository = Repository;

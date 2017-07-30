@@ -12,6 +12,8 @@ function ViewModel(ctx) {
     self.image = ko.observable();
     self.size = ko.observable();
     self.nextTaskAvailable = ko.observable(true);
+    self.annotationEnabled = ko.observable(true);
+    self.shouldShow = ko.computed(function(){return self.nextTaskAvailable() && self.annotationEnabled();});
 
     self.line = ko.observable();
     self.line.subscribe(function () {
@@ -30,17 +32,17 @@ function ViewModel(ctx) {
             ctx.repositories.status.getAuthApiToken(),
             ctx.repositories.status.getCurrentTask().session
         ).then(function (result) {
-            alert("Success");
+          //  alert("Success");
             if(isNext){
                 self.getNextTaskInstance();
             }
         }).catch(function (e) {
             if(e == "Error: Not Found"){
-                self.nextTaskAvailable(false);
+               // self.nextTaskAvailable(false);
             }
-            alert("session" + e.textStatus);
-            alert("Error");
-            alert(e);
+            //alert("session" + e.textStatus);
+            //alert("Error");
+            //alert(e);
         });
     };
 
@@ -51,17 +53,19 @@ function ViewModel(ctx) {
             ctx.repositories.status.getAuthApiToken(),
             ctx.repositories.status.getCurrentTask().session
         ).then(function (result) {
-            alert("Success");
+           // alert("Success");
             self.type(result.type);
             self.image(result.image);
             self.size(result.size);
-        }).catch(function (e) {
-            if(e == "Error: Gone"){
+            }).catch(function (e) {
+            if(e == "Error: Gone" && ctx.repositories.status.getCurrentTask().type == "selection"){
                 self.nextTaskAvailable(false);
+            }else if ( ctx.repositories.status.getCurrentTask().type == "annotation"){
+                self.annotationEnabled(false);
             }
-            alert("getNextTask" + e.textStatus);
-            alert("Error");
-            alert(e);
+            //alert("getNextTask" + e);
+            //alert("Error");
+           // alert(e);//GONE = Già fatto
         });
     };
     self.getNextTaskInstance();
@@ -75,6 +79,7 @@ function ViewModel(ctx) {
                 self.line()
             ).then(function (result) {
                 alert("Submitted");
+                self.line('');
                 self.getNextTaskInstance();
                 //self.startWorkingSession(true);
             }).catch(function (e) {

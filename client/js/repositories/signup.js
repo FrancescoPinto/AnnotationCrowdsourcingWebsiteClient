@@ -15,7 +15,7 @@ Repository.prototype.validateAndSend = function (fullname,username,pwd1,role) {
     var self = this;
     //per i test dada, dada, legiliments -> registrato con successo
     //anche dada1,dada1,legiliments
-    alert("Sto per fare il Promise con dati" + fullname + username + pwd1 + role);
+    //alert("Sto per fare il Promise con dati" + fullname + username + pwd1 + role);
         return new Promise(function (resolve, reject) {
             $.ajax({
                 url: self._server + '/api/user',
