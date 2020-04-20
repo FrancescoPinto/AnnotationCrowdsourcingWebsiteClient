@@ -35,7 +35,7 @@
     "gulp-rimraf": "^0.2.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.1",
-    "jquery": "2.2.4",
+    "jquery": "3.5.0",
     "knockout": "^3.4.0",
     "ko-component-router": "^4.4.4",
     "merge": "^1.2.0",
